@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
-            $table->string('dayname', 12);
+            $table->json('dayname');
             $table->time('open');
             $table->time('closed');
         });
