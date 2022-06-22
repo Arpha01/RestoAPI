@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RestaurantRequest;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Restaurant;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -67,30 +68,13 @@ class RestaurantController extends Controller
         $restaurant = new Restaurant($request->only('name'));
 
         if($restaurant->save()) {
-            // $schedules = $request->schedules;
+            $schedules = $request->schedules;
 
-            // foreach($schedules as $schedule) {
-            //     $restaurant->schedules()->create($schedule);
-            // }
+            foreach($schedules as $schedule) {
+                $openHours = new Schedule(Restaurant::generateSchedule($schedule, $restaurant->id));
 
-            // $dayName = explode('-', $request->day);
-
-            // $dayStart = Carbon::parse($dayName[0]);
-            // $dayEnd = null;
-    
-            // if(count($dayName) > 1) {
-            //     $dayEnd = Carbon::parse($dayName[1]);
-            // }
-    
-            // $diff = $dayStart->diffInDays($dayEnd ?? $dayStart);
-    
-            // for($i = 1; $i < $diff; $i++) {
-            //     $restaurant->schedules()->create([
-            //         'dayname' => $dayStart->addDays($i)->format('D'),
-            //         'open' => $open,
-            //         'closed' => $closed,
-            //     ]);
-            // }
+                $openHours->save();
+            }
 
             return (new RestaurantResource($restaurant))
                 ->additional($this->additionalResource($restaurant));
@@ -149,7 +133,9 @@ class RestaurantController extends Controller
         $schedules = $request->schedules;
 
         foreach($schedules as $schedule) {
-            $restaurant->schedules()->create($schedule);
+            $openHours = new Schedule(Restaurant::generateSchedule($schedule, $restaurant->id));
+
+            $openHours->save();
         }
 
         $restaurant->load('schedules');
