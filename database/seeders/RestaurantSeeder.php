@@ -22,7 +22,7 @@ class RestaurantSeeder extends Seeder
         $restaurant->save();
 
         Schedule::create([
-            'dayname' => 'Mon-Sun',
+            'dayname' => json_encode(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']),
             'open' => '11:30',
             'closed' => '21:00',
             'restaurant_id' => $restaurant->id,
