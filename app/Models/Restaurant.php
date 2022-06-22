@@ -34,4 +34,14 @@ class Restaurant extends Model
             $query->where('dayname', $dayName);
         });
     }
+
+    public function scopeGenerateSchedule($query, $schedule, $restaurantId) 
+    {
+        return [
+            'dayname' => json_encode($schedule['dayname']),
+            'open' => $schedule['open'],
+            'closed' => $schedule['closed'],
+            'restaurant_id' => $restaurantId,
+        ];
+    }
 }
