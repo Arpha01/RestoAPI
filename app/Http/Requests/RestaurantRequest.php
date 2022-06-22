@@ -27,39 +27,23 @@ class RestaurantRequest extends FormRequest
      */
     public function rules()
     {
-        // return [
-        //     'name' => 'required|min:3|max:60',
-        //     'schedules' => 'required|array',
-        //     'schedules.*.dayname' => 'required',
-        //     'schedules.*.open' => 'required',
-        //     'schedules.*.closed' => 'required',
-        // ];
-
-         return [
+        return [
             'name' => 'required|min:3|max:60',
-            'dayname' => 'required',
-            'open' => 'required',
-            'closed' => 'required',
+            'schedules' => 'required|array',
+            'schedules.*.dayname' => 'required',
+            'schedules.*.open' => 'required',
+            'schedules.*.closed' => 'required',
         ];
     }
 
     public function messages()
     {
-        // return [
-        //     'name.required' => 'Nama belum diisi',
-        //     'name.min' => 'Nama minimal 3 karakter',
-        //     'name.max' => 'Nama maksimal 60 karakter',
-        //     'schedules.required' => 'Jadwal belum diisi',
-        //     'schedules.array' => 'Jadwal harus berupa array'
-        // ];
-
         return [
             'name.required' => 'Nama belum diisi',
             'name.min' => 'Nama minimal 3 karakter',
             'name.max' => 'Nama maksimal 60 karakter',
-            'dayname.required' => 'Hari belum diisi',
-            'open.required' => 'Jam buka belum diisi',
-            'closed.required' => 'Jam tutup belum diisi',
+            'schedules.required' => 'Jadwal belum diisi',
+            'schedules.array' => 'Jadwal harus berupa array'
         ];
     }
 
