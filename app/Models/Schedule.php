@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Attribute;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
