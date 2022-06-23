@@ -14,10 +14,22 @@ class RestaurantResource extends JsonResource
      */
     public function toArray($request)
     {
+       $openSchedule = [];
+       foreach($this->schedules as $openHours) {
+            $dayNames = json_decode($openHours->dayname);
+
+            $firstDay = $dayNames[0];
+            $endDay = count($dayNames) ? end($dayNames) : null;
+
+            $schedule = $endDay ? $firstDay.' - '.$endDay : $firstDay;
+
+            $openSchedule[] = $schedule . ' ' . $openHours->open . ' - ' . $openHours->closed;
+       }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'schedules' => ScheduleResource::collection($this->schedules),
+            'schedules' => $openSchedule,
         ];
     }
 }
