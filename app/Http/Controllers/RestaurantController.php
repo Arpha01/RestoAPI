@@ -24,23 +24,20 @@ class RestaurantController extends Controller
     public function index(Request $request)
     {
         $limit = $request->input('limit', 10);
+
+        $direction = $request->input('direction', 'asc');
+        $attribute = $request->input('attribute', 'id');
         
-        $restaurants = Restaurant::orderBy('name');
+        $restaurants = Restaurant::orderBy($attribute, $direction);
 
         if($request->has('name')) {
             $restaurants = $restaurants->where('name', 'like', '%' . $request->name . '%');
         }
 
-        if($request->has('open') || $request->has('closed')) {
-            $restaurants = $restaurants->whereOpenHours($request->open, $request->closed);
+        if($request->has('time') || $request->has('day')) {
+            $restaurants = $restaurants->whereOpenHours($request->time, $request->day);
         }
 
-        if($request->has('day')) {
-            $day = $request->day;
-            $restaurants = $restaurants->whereHas('schedules', function($query) use ($day) {
-                $query->where('day', 'like', '%' . $day . '%');
-            });
-        }
 
         $restaurants = $restaurants->paginate($limit);
 
