@@ -17,14 +17,20 @@ class Restaurant extends Model
         return $this->hasMany(Schedule::class);
     }
 
-    public function scopeWhereOpenHours($query, $open = null, $closed = null)
+    public function scopeWhereOpenHours($query, $time = null, $day = null)
     {
-        $open = $open ?? Carbon::now()->format('H:i');
+        $time = $time ?? Carbon::now()->format('H:i');
 
-        $closed = $closed ?? Carbon::now()->format('H:i');
+        $day = $day ?? Carbon::now()->format('D');
 
-        return $query->whereHas('schedules', function ($query) use ($open, $closed) {
-            $query->where('open', '<=', $open)->where('closed', '>', $closed);
+        return $query->whereHas('schedules', function ($query) use ($time, $day) {
+            if($time && $day) {
+                $query->where('open', '<=', $time)->where('closed', '>', $time)->whereJsonContains('dayname', $day);
+            } elseif($time) {
+                $query->where('open', '<=', $time)->where('closed', '>', $time);
+            } else {
+                $query->whereJsonContains('dayname', $day);
+            }
         });
     }
 
