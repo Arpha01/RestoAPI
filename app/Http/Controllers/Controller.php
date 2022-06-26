@@ -15,7 +15,7 @@ class Controller extends BaseController
     {
         return [
             'success' => $success,
-            'total' => $model->count() ?? 0,
+            'total' => is_int($model) ? $model : $model->count(),
             'code' => $code
         ];
     }

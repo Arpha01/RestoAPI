@@ -19,7 +19,7 @@ class RestaurantResource extends JsonResource
             $dayNames = json_decode($openHours->dayname);
 
             $firstDay = $dayNames[0];
-            $endDay = count($dayNames) ? end($dayNames) : null;
+            $endDay = count($dayNames) > 1 ? end($dayNames) : null;
 
             $schedule = $endDay ? $firstDay.' - '.$endDay : $firstDay;
 

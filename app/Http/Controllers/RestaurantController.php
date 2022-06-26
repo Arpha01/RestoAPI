@@ -34,14 +34,25 @@ class RestaurantController extends Controller
             $restaurants = $restaurants->where('name', 'like', '%' . $request->name . '%');
         }
 
-        if($request->has('time') || $request->has('day')) {
-            $restaurants = $restaurants->whereOpenHours($request->time, $request->day);
-        }
+        $day = $request->input('day');
+        $time = $request->input('time');
 
+        if($request->has('time') && $request->has('day')) {
+            $restaurants = $restaurants->whereOpenHours($time, $day);
+        } elseif($request->has('time')) {
+            $restaurants = $restaurants->whereOpenHours($time);
+        } elseif($request->has('day')) {
+            $restaurants = $restaurants->whereOpenDays($day);
+        }
 
         $restaurants = $restaurants->paginate($limit);
 
-        return RestaurantResource::collection($restaurants)->additional($this->additionalResource($restaurants));
+        $restaurantInstance = $request->has('name') || $request->has('time') || $request->has('day') 
+             ? $restaurants : Restaurant::count();
+
+        return RestaurantResource::collection($restaurants)->additional(
+            $this->additionalResource($restaurantInstance)
+        );
     }
 
     /**

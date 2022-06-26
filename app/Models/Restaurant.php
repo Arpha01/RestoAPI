@@ -19,19 +19,21 @@ class Restaurant extends Model
 
     public function scopeWhereOpenHours($query, $time = null, $day = null)
     {
-        $time = $time ?? Carbon::now()->format('H:i');
+        if($time && $day) {
+            return $query->join('schedules', 'schedules.restaurant_id', '=', 'restaurants.id')
+                ->whereJsonContains('dayname', [$day])
+                ->whereRaw('(open < closed AND ? >= open AND ? < closed) OR (closed < open AND (? < closed or ? >= open))', [$time, $time, $time, $time])
+                ->groupBy('schedules.restaurant_id');
+                
+        } elseif($time) {
+            return $query->join('schedules', 'schedules.restaurant_id', '=', 'restaurants.id')
+                ->whereRaw('(open < closed AND ? >= open AND ? < closed) OR (closed < open AND (? < closed or ? >= open))', [$time, $time, $time, $time])
+                ->groupBy('schedules.restaurant_id');
 
-        $day = $day ?? Carbon::now()->format('D');
-
-        return $query->whereHas('schedules', function ($query) use ($time, $day) {
-            if($time && $day) {
-                $query->where('open', '<=', $time)->where('closed', '>', $time)->whereJsonContains('dayname', $day);
-            } elseif($time) {
-                $query->where('open', '<=', $time)->where('closed', '>', $time);
-            } else {
-                $query->whereJsonContains('dayname', $day);
-            }
-        });
+        } else {
+            return $query->join('schedules', 'schedules.restaurant_id', '=', 'restaurants.id')->whereJsonContains('dayname', [$day])
+            ->groupBy('schedules.restaurant_id');
+        }
     }
 
     public function scopeWhereOpenDays($query, $dayName) 
