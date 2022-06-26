@@ -4,6 +4,8 @@ Halo 👋 selamat datang di halaman repository RestoAPI. RestoAPI adalah sebuah 
 
 Untuk repository UI Frontend dapat diakses di https://github.com/Arpha01/RestoUI
 
+Untuk format waktu yang digunakan dalam project ini menggunakan 24hour format, dan **tidak** menggunakan am/pm
+
 #### Tools yang digunakan dalam pengembangan
 
 | Tools                                | Version       |
