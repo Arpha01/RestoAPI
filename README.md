@@ -1,64 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# RestoAPI
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Halo 👋 selamat datang di halaman repository RestoAPI. RestoAPI adalah sebuah aplikasi web sederhana pendataan restoran terfavorit di seluruh indonesia yang menggunakan Laravel sebagai API dan Angular sebagai Frontend.
 
-## About Laravel
+Untuk repository UI Frontend dapat diakses di https://github.com/Arpha01/RestoUI
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### Tools yang digunakan dalam pengembangan
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Tools                                | Version       |
+| -------------                        |:-------------:|
+| Composer                             | 2.1.14        |
+| Laravel                              | 9.11          |
+| PHP                                  | 8.0.7         |
+| Laravel Sanctum (Authentication)     | 2.15          |
+| Laragon                              | 5.0           |
+| Postman                              | -             | 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Setup
+- Clone Repository ini
+- Ekstrak file yang telah didownload
+- Jalankan terminal, dan arahkan terminal ke direktori ekstrak file menggunakan `cd pathtodirectory`
+- Dalam terminal jalankan `composer install`
+- Ubah nama file .env.example file ke .env
+- Edit file .env pada `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD` sesuaikan dengan konfigurasi database anda
 
-## Learning Laravel
+# Kredensial
+Berikut adalah kredensial default yang dapat digunakan untuk login
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Email                                | Password      | Type    |
+| -------------                        |:-------------:|---------|
+| admin@mail.com                       | admin123      | Admin   |
+| user@mail.com                        | user123       | User    |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Tampilan & Pengujian
+Halaman home 
+![halaman home](https://user-images.githubusercontent.com/11209553/175824414-c06af4c0-5368-4d2a-b1ea-8d6fc88191d2.png)
 
-## Laravel Sponsors
+Halaman login user biasa di  /auth/login
+![Halaman login user](https://user-images.githubusercontent.com/11209553/175824436-6a237d7f-ccf0-4fc6-ac9a-1bb36d6fd4c0.png)
+ 
+Halaman login user Admin di /auth/admin/login
+ ![Halaman login admin](https://user-images.githubusercontent.com/11209553/175824422-d1996c75-8a05-404c-b8b9-ef5c053155d5.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+User melihat data restoran di /restaurant
+![User melihat data restoran](https://user-images.githubusercontent.com/11209553/175824443-bd87e10f-53d0-48bf-bd9a-403bb263d4fa.png)
 
-### Premium Partners
+User melakukan filter berdasarkan hari dan waktu
+![User filter data restoran](https://user-images.githubusercontent.com/11209553/175824464-88e960d2-2e18-4c3d-9531-3da1b1221221.png)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Admin dapat melihat data restoran
+![Admin melihat data restoran](https://user-images.githubusercontent.com/11209553/175824473-4b9c4f64-3f55-4b20-a093-6dfd9fbe59f3.png)
+ 
+Admin melakukan filter data restoran
+![Admin filter data restoran](https://user-images.githubusercontent.com/11209553/175824485-bf0fb00d-0244-4b3a-9813-d1db7d613214.png)
 
-## Contributing
+Admin menambahkan restoran baru di /restaurant/create
+![Admin Buat data restoran](https://user-images.githubusercontent.com/11209553/175824492-c65226f5-19db-4591-81b2-fe9e102d7aa4.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Admin berhasil menambahkan restoran baru
+![Admin berhasil simpan data restoran](https://user-images.githubusercontent.com/11209553/175824504-7d77cd82-c396-45e2-8ed9-1f0c4ac83b38.png)
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
